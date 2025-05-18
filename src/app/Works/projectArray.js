@@ -28,6 +28,13 @@ const Projectsarray = [
     },
 
     {
+        date: "2024",
+        pname: "Cook it easy",
+        role1: "UI/UX Designer",
+        img: "./Images/cook.png"
+    },
+
+    {
         date: "2025", 
         pname: "Client Portfolio", 
         role1: "UI/UX Designer", 
