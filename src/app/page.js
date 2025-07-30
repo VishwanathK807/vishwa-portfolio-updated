@@ -18,7 +18,7 @@ export default function Home() {
         <Cursor>Scroll to see more</Cursor>
         <div className="flex flex-col justify-center relative top-[35vh] z-0 items-center ">
           <motion.div initial={{x:-100}} whileInView={{x:0}} transition={{duration:2}} viewport={{once:true}} className="absolute w-[35%] h-auto  -left-28 ">
-          <Image src="/Images/me.png" layout="responsive" width={500} height={500} alt="me" className="hidden lg:block md:block"/>
+          <Image src="/Images/me.png" width={500} height={500} alt="me" className="hidden lg:block md:block"/>
           </motion.div>
           
           <motion.div initial="hidden" whileInView="visible" viewport={{once:true}} className="overflow-hidden relative left-4 w-auto h-fit">
