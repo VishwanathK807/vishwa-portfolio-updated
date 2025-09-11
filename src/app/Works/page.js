@@ -10,6 +10,7 @@ import Link from "next/link";
 const DynamicProject = dynamic(() => import("./projects"), {
   loading: () => <p>Loading...</p>,
 });
+
 function Works() {
   return (
     <Transition>
