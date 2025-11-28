@@ -1,10 +1,9 @@
 "use client";
-import { React, useRef } from "react";
+import { React, useRef, useState } from "react";
 import { motion, useScroll, useTransform } from "motion/react";
-import dynamic from "next/dynamic";
-import Data from "./Scene.json";
 import Transition from "../Transition";
-const Lottie = dynamic(() => import("lottie-react"), { ssr: false });
+import axios from "axios";
+
 function Hire() {
   const ref = useRef();
   const { scrollYProgress } = useScroll({ target: ref });
@@ -13,6 +12,28 @@ function Hire() {
   const card3 = useTransform(scrollYProgress, [0.2, 0.35], [90, 0]);
   const card4 = useTransform(scrollYProgress, [0.35, 0.6], [90, 0]);
   const card5 = useTransform(scrollYProgress, [0.6, 0.78], [90, 0]);
+  const [details,setdetails] = useState({user_name:"",email:"",message:""});
+  const handleChange = (e)=>{
+    e.preventDefault();
+    const {name,value} = e.target;
+    setdetails((p)=>({
+      ...p,
+      [name]:value,
+    }))
+  }
+  const handleSubmit = (e)=>{
+    e.preventDefault();
+    try{
+      const res = axios.post("http://localhost:8080/add",details);
+      res==true?alert("success"):null;
+      
+      
+    }catch(err){
+      console.log(err);
+    }finally{
+      setdetails({user_name:"",email:"",message:""});
+    }
+  }
   return (
     <Transition>
       <div className="h-[700vh] w-screen relative">
@@ -105,96 +126,65 @@ function Hire() {
         </div>
         <div>
           <div className="h-screen mt-[-100vh]" />
-          <div className="h-screen w-screen bg-[#edfed1]  sticky bottom-0  flex  justify-center items-center rounded-t-[56px]">
-            <div className="lg:text-7xl lg:tracking-widest md:text-6xl md:tracking-wider sm:text-5xl text-3xl sm:text-center sm:tracking-normal  font-semibold text-black">
-              Let&#39;s connect
+          <div className="h-[100vh] w-screen bg-[#edfed1] sticky bottom-0  flex  justify-center rounded-t-[56px]">
+            <div className="h-auto w-auto flex lg:flex-row md:flex-row flex-col mt-30 items-center justify-center lg:gap-50 md:gap-40">
+            <div className="lg:text-7xl lg:tracking-widest  lg:text-left md:text-left md:text-6xl md:tracking-wider sm:text-5xl  text-3xl sm:text-center sm:tracking-normal  font-semibold text-black">
+              Let's connect
             </div>
-            <motion.div
-              initial={{ opacity: 0 }}
-              whileInView={{ opacity: 1 }}
-              transition={{ duration: 1, delay: 0.5 }}
-              className="w-fit h-fit absolute top-0"
-            >
-              <Lottie
-                animationData={Data}
-                speed={3}
-                style={{
-                  height: "500px",
-                  width: "500px",
-                }}
-              />
-            </motion.div>
 
-            <div className="w-fit h-hit justify-center items-center flex gap-20 left-1/2 -translate-x-1/2 p-5 absolute bottom-1/4">
-              <div className="h-fit w-fit animate-bounce">
-                <a href="https://www.instagram.com/vizrandomnz/" target="_blank">
-                  <svg
-                    className="w-18 h-18"
-                    viewBox="0 0 512 512"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <defs>
-                      <linearGradient
-                        id="instaGradient"
-                        x1="0%"
-                        y1="0%"
-                        x2="100%"
-                        y2="100%"
-                      >
-                        <stop offset="0%" stopColor="#feda75" />
-                        <stop offset="25%" stopColor="#fa7e1e" />
-                        <stop offset="50%" stopColor="#d62976" />
-                        <stop offset="75%" stopColor="#962fbf" />
-                        <stop offset="100%" stopColor="#4f5bd5" />
-                      </linearGradient>
-                    </defs>
-                    <rect
-                      x="64"
-                      y="64"
-                      width="384"
-                      height="384"
-                      rx="80"
-                      ry="80"
-                      fill="url(#instaGradient)"
-                    />
-                    <circle cx="256" cy="256" r="96" fill="#ffffff" />
-                    <circle cx="390" cy="122" r="24" fill="#ffffff" />
-                  </svg>
-                </a>
+            {/* form element */}
+            <form 
+              onSubmit={handleSubmit}
+              className="w-[150%]  max-w-xl bg-white/60 backdrop-blur-xl p-8 rounded-2xl shadow-xl  flex flex-col gap-6"
+              method="POST"
+            >
+              <div className="flex flex-col gap-2">
+                <label className="text-black font-semibold text-lg">Name</label>
+                <input
+                  onChange={handleChange}
+                  value = {details.user_name}
+                  type="text"
+                  name="user_name"
+                  required
+                  className="p-3 rounded-lg border-1 border-dashed text-black outline-none"
+                />
               </div>
-              <div className="h-fit w-fit animate-bounce">
-                <a href="https://www.linkedin.com/in/vishwanath-k-a42044225/" target="_blank">
-                  <svg
-                    className="w-14 h-14"
-                    viewBox="0 0 448 512"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <defs>
-                      <linearGradient
-                        id="linkedinGradient"
-                        x1="0%"
-                        y1="0%"
-                        x2="100%"
-                        y2="100%"
-                      >
-                        <stop offset="0%" stopColor="#0077B5" />
-                        <stop offset="100%" stopColor="#005582" />
-                      </linearGradient>
-                    </defs>
-                    <rect
-                      width="105%"
-                      height="100%"
-                      rx="60"
-                      fill="url(#linkedinGradient)"
-                    />
-                    <path
-                      fill="#ffffff"
-                      d="M100.28 202.56h55.89v182.23h-55.89zm27.94-91.05c-18.04 0-32.65 14.61-32.65 32.65s14.61 32.65 32.65 32.65 32.65-14.61 32.65-32.65-14.6-32.65-32.65-32.65zm60.73 91.05h53.52v24.89h.77c7.46-14.13 25.7-29.05 52.91-29.05 56.58 0 66.99 37.24 66.99 85.63v100.76h-55.87v-89.25c0-21.31-.38-48.73-29.7-48.73-29.73 0-34.27 23.24-34.27 47.28v90.7h-54.35z"
-                    />
-                  </svg>
-                </a>
+
+              <div className="flex flex-col gap-2">
+                <label className="text-black font-semibold text-lg">
+                  Email
+                </label>
+                <input
+                  type="email"
+                  name="email"
+                  onChange={handleChange}
+                  value = {details.email}
+                  required
+                  className="p-3 rounded-lg border-1  border-dashed text-black outline-none"
+                />
               </div>
-            </div>
+
+              <div className="flex flex-col gap-2">
+                <label className="text-black font-semibold text-lg">
+                  Message
+                </label>
+                <input
+                  name="message"
+                  onChange={handleChange}
+                  value = {details.message}
+                  required
+                  className="p-3 rounded-lg border-1 border-dashed text-black outline-none"
+                />
+              </div>
+
+              <button
+                type="submit"
+                className="bg-black text-white py-3 rounded-lg font-semibold hover:opacity-80 transition"
+              >
+                Send
+              </button>
+            </form>
+          </div>
           </div>
         </div>
       </div>

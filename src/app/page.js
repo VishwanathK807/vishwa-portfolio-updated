@@ -51,7 +51,7 @@ export default function Home() {
                 
                 className="text-[#1C1C1C] font-light text-[30px]"
               >
-                <h1>Web Developer</h1>
+                <h1>Fullstack Developer</h1>
               </motion.div>
             </motion.div>
 
@@ -101,7 +101,7 @@ export default function Home() {
                     />
                   </svg>
                 </span>{" "}
-                frontend developer
+                Fullstack developer
               </span>
               . Feel free to admire my creation😊
             </div>
