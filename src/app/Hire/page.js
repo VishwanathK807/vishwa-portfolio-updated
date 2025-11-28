@@ -129,7 +129,7 @@ function Hire() {
           <div className="h-[100vh] w-screen bg-[#edfed1] sticky bottom-0  flex  justify-center rounded-t-[56px]">
             <div className="h-auto w-auto flex lg:flex-row md:flex-row flex-col mt-30 items-center justify-center lg:gap-50 md:gap-40">
             <div className="lg:text-7xl lg:tracking-widest  lg:text-left md:text-left md:text-6xl md:tracking-wider sm:text-5xl  text-3xl sm:text-center sm:tracking-normal  font-semibold text-black">
-              Let's connect
+              Let&#39;s connect
             </div>
 
             {/* form element */}
